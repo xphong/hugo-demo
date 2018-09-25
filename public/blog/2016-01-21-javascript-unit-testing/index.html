@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Author Name" />
+    <meta name="description" content="Describe your website">
+    <link rel="shortcut icon" type="image/x-icon" href="https://hugo-demo.github.io/img/favicon.ico">
+    <title>JavaScript Unit Testing and Code Coverage</title>
+    <meta name="generator" content="Hugo 0.46" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://hugo-demo.github.io/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="https://hugo-demo.github.io/"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/projects/">PROJECTS</a></li>
+        
+        <li><a href="/resume/">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="https://hugo-demo.github.io/blog/2016-01-21-javascript-unit-testing/">JavaScript Unit Testing and Code Coverage</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          January 21, 2016
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+<p><a href="/wp-content/uploads/2016/01/b1cda5a7a4e429cbb4df3f5c0d27c2b9.jpg"><img class="alignnone size-full wp-image-1290" src="/wp-content/uploads/2016/01/b1cda5a7a4e429cbb4df3f5c0d27c2b9.jpg" alt="b1cda5a7a4e429cbb4df3f5c0d27c2b9" width="3000" height="2000" /></a></p>
+
+<p>In my last blog post <a href="http://www.phonghuynh.ca/transitioning-school-workplace/" target="_blank">A Web Developer&#8217;s Transition From School to the Workplace</a> I wrote that as a web developer, you should never stop learning and growing. I joined a new company a bit over a year ago and in the past year I have learned a lot, specifically about unit testing code. This is because on our projects, unit tests are required for a user story to be closed.</p>
+
+<p>At previous companies I have worked at, unit tests were never enforced for JavaScript code. According to <a href="http://ashleynolan.co.uk/blog/frontend-tooling-survey-2015-results#q7-javascript-testing" target="_blank">this recent survey</a>, 59.66% of respondents do not use a tool to test their JavaScript.</p>
+
+<p>A unit test primarily focuses on a single unit of code. For example, a function can be a unit of code that can be tested. Unit tests should be small and easy to run. They should also be independent from any dependencies which means no network or database access. Mock data objects are instead used for any code that requires data.</p>
+
+<h2 id="importance-of-unit-testing">Importance of Unit Testing</h2>
+
+<ul>
+<li>Unit tests enables you and your team to make changes to the code without breaking the existing application because the tests fail if something is broken.</li>
+<li>Saves a lot of time since you will know your code is broken when the tests fail instead of manually testing the application.</li>
+<li>Encourages modular code and reduces code complexity because it enforces you to write smaller and testable blocks of code.</li>
+<li>Easier in the long run when you or a new developer makes changes or refactors the code in the future.</li>
+<li>Helps you better understand the design of the code that is being tested.</li>
+<li>Reduces the need for documentation and long comments because you are able to see all of the conditions and results expected from that unit of code.</li>
+<li>Gives a nice visual feedback (green for pass and red for fail) which tells your brain whether you are doing something right or wrong.</li>
+</ul>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="angularjs-unit-testing">AngularJS Unit Testing</h3>
+
+<pre>describe('Home Page', function () {
+    var controller;
+
+    beforeEach(module('app.home'));
+
+    beforeEach(inject(function ($controller) {
+        controller = $controller;
+
+        controller = $controller('HomeController', {});
+    }));
+
+    it('should set someVar to blue', function() {
+        expect(controller.someVar).toEqual('blue');
+    });
+
+    it('should set someList to one, two, three', function() {
+        expect(controller.someList).toEqual(['one', 'two', 'three']);
+    });
+
+    describe('Click Button', function () {
+        it('should show alert message when clicked', function() {
+            spyOn(window, 'alert');
+            controller.someFunctionUsedByTheHomePage();
+            expect(window.alert).toHaveBeenCalledWith('Congratulations');
+        });
+    });
+});</pre>
+
+<h3 id="sails-js-node-js-unit-testing">Sails.js (Node.js) Unit Testing</h3>
+
+<pre>var HelloController = require('../../api/controllers/HelloWorldController'),
+    assert = require('chai').assert,
+    request = require('supertest'),
+    url = 'http://localhost:1337';
+
+describe('The Hello Controller', function() {
+    var Sails = require('sails'),
+        sails;
+
+    before(function(done) {
+      Sails.lift({}, function(err, server) {
+        sails = server;
+        if (err) return done(err);
+            done(err, sails);
+        });
+    });
+
+    after(function(done) {
+        Sails.lower(done);
+    });
+
+    describe('GET /helloworld', function() {
+        it('should return hello world message', function(done) {
+            request(url)
+                .get('/HelloWorld')
+                .end(function(err, res) {
+                    if (err) {
+                        throw err;
+                    }
+
+                    assert(res.status, 200);
+                    assert(res.text, 'Hello World');
+                    done();
+                });
+        });
+    });
+});</pre>
+
+<h2 id="code-coverage">Code Coverage</h2>
+
+<p>A way to measure the amount of code that is actually being tested is to use a code coverage tool, a nice tool to use is <a href="https://github.com/gotwarlost/istanbul" target="_blank">Istanbul</a>. It is a good approach to identify if you have properly tested a line of code.</p>
+
+<p>Using a coverage tool provides you a friendly visual report.</p>
+
+<p><img class="size-large wp-image-1308 aligncenter" src="/wp-content/uploads/2016/01/Screen-Shot-2016-01-21-at-10.05.51-AM-1024x361.png" alt="Screen Shot 2016-01-21 at 10.05.51 AM" width="650" height="229" srcset="/wp-content/uploads/2016/01/Screen-Shot-2016-01-21-at-10.05.51-AM-1024x361.png 1024w, /wp-content/uploads/2016/01/Screen-Shot-2016-01-21-at-10.05.51-AM-300x106.png 300w, /wp-content/uploads/2016/01/Screen-Shot-2016-01-21-at-10.05.51-AM-150x53.png 150w, /wp-content/uploads/2016/01/Screen-Shot-2016-01-21-at-10.05.51-AM-1300x458.png 1300w, /wp-content/uploads/2016/01/Screen-Shot-2016-01-21-at-10.05.51-AM-720x254.png 720w, /wp-content/uploads/2016/01/Screen-Shot-2016-01-21-at-10.05.51-AM-400x141.png 400w, /wp-content/uploads/2016/01/Screen-Shot-2016-01-21-at-10.05.51-AM-800x282.png 800w" sizes="(max-width: 650px) 100vw, 650px" /></p>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      </div>
+      
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://hugo-demo.github.io/js/docs.min.js"></script>
+<script src="https://hugo-demo.github.io/js/main.js"></script>
+
+<script src="https://hugo-demo.github.io/js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>
