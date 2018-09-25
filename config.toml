@@ -1,4 +1,4 @@
-baseurl = "https://example.com/"
+baseurl = "https://hugo-blog-demo.netlify.com/"
 languageCode = "en-US"
 title = "Hugo Site"
 disqusShortname = ""
