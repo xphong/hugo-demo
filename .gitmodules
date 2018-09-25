@@ -1,3 +1,0 @@
-[submodule "hugo-demo.github.io"]
-	path = public
-	url = git@github.com:xphong/hugo-demo.github.io.git
