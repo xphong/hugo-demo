@@ -1,0 +1,3 @@
+[submodule "hugo-demo.github.io"]
+	path = hugo-demo.github.io
+	url = git@github.com:xphong/hugo-demo.github.io.git
