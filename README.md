@@ -1,6 +1,6 @@
 # hugo-demo
 
-* Built for [WordPress to Static Site Generator (Hugo) Migration and Deployment](https://phong.io/blog/2018-09-24-portfolio-wordpress-to-hugo-static-site-migration/) blog post
+* Built for [WordPress to Static Site Generator (Hugo) Migration and Deployment](https://hackernoon.com/wordpress-to-static-site-generator-hugo-migration-and-deployment-788a69b93e66) blog post
 
 ## Quickstart
 
